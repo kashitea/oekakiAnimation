@@ -2,7 +2,7 @@ class Canvas {
   canvas;
   ctx;
 
-  now_data;
+  now_data = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=';
   now_cut;
 
   is_drawing = false;
@@ -18,7 +18,7 @@ class Canvas {
 
     //size変更のイベントハンドラ+size合わせる
     window.addEventListener('resize', this.size_update.bind(this));
-    this.size_update();
+    this.size_update(false);
 
     this.canvas.addEventListener('mousedown', this.draw_start.bind(this));
     this.canvas.addEventListener('mouseup', this.draw_end.bind(this));
@@ -28,10 +28,12 @@ class Canvas {
     this.thickness_slider = document.querySelector('input[type=range]')
   }
 
-  size_update() {
+  size_update(reflesh = true) {
     this.canvas.width = this.canvas.clientWidth;
     this.canvas.height = this.canvas.clientHeight;
-    this.setimg();
+    //if(reflesh){
+      this.refleshimg();
+    //}
   }
 
   update_cut(i) {
@@ -42,21 +44,40 @@ class Canvas {
     data.update_img(this.now_cut, this.now_data);
   }
 
-  setimg() {
+  setimg(i) {
     //解像度合わせてcanvasに描画
+    this.now_cut = i;
+
     let img = new Image();
+    this.now_data = data.getimg(i)
     img.src = this.now_data;
 
     const ctx = this.ctx;
     const canvas = this.canvas
 
-    img.onload = function(){
+    img.onload = function() {
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     }
   }
   getimg() {
     //base64で現在のキャンバス画像を取得
     return this.canvas.toDataURL('image/png');
+  }
+
+  refleshimg() {
+    let img = new Image();
+    img.src = this.now_data;
+
+    const ctx = this.ctx;
+    const canvas = this.canvas
+
+    img.onload = function() {
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    }
+  }
+
+  clear() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
 

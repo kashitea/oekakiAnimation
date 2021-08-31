@@ -18,6 +18,9 @@ data {
   display: none;
 }
 
+.header > div {
+  display: inline;
+}
 
 /* canvas */
 .canvas-wrapper {
@@ -31,7 +34,7 @@ data {
 
 canvas {
   width: 80%;
-  aspect-ratio: 19/9;
+  aspect-ratio: 21/9;
   box-sizing: border-box;
   border: 3px black solid;
 }
@@ -50,47 +53,99 @@ ul {
   flex-wrap: nowrap;
 }
 
-li {
+li:not(.dummy) {
   display: grid;
-  grid-template-rows: 1fr 30%;
+  grid-template-rows: 1fr 40%;
   width: 120px;
+  min-width: 120px;
   height: 50%;
   padding: 0;
   margin: 0;
-  background-color: red;
-  border-radius: 3px;
+  background-color: whitesmoke;
+  border-radius: 3px ;
+  border:1px black solid;
   /* resize: horizontal;
   overflow: auto; */
   text-align: center;
   margin-left: 2px;
-  
+  margin-right: 2px;
+}
+.dummy {
+  height: 50%;
+  width: 80px;
+  min-width: 80px;
+}
+
+.select {
+  border: 4px yellow double !important;
+}
+
+li > div {
+  width: 100%;
+  height: 100%;
+  font-size: 4px;
+  text-align: center;
+  letter-spacing: 1px;
 }
 li input {
   width: 95%;
-  height: 80%;
+  /* height: 80%; */
   padding: 0;
   margin: 0;
+  text-align: center;
 }
+
+
+li span {
+  text-align: center;
+}
+
+
+
 
 
 .dragging {
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .drag-over {
-  background-color: aqua;
+  /* background-color: aqua !important; */
 }
 .drag-over::before {
-  background-color: greenyellow;
+  content: '';
   display: block;
-  height: 100%;
+  background-color: red;
+  display: block;
+  height: 90px;
+  width: 2px;
+  position: absolute;
 }
+
+
+
+
 
 
 .timeline {
   display: grid;
   width: 100%;
   height: 100%;
-  grid-template-rows: auto;
+  grid-template-columns: 1fr 110px;
+  user-select: none;
 }
 
+
+
+
+.files_dialog {
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: whitesmoke;
+}
