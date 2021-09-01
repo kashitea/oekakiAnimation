@@ -133,4 +133,9 @@ class Data {
     return this.data.children.length;
   }
 
+  delete_cut(i) {
+    const el = this.data.children[i];
+    el.remove();
+  }
+
 }

@@ -3,9 +3,10 @@ class Timeline {
   is_li_dragging = false;
   target;
 
+  ul;
+
   is_play = false;
 
-  ul;
 
   constructor() {
     this.ul = document.querySelector('ul');
@@ -24,6 +25,8 @@ class Timeline {
     playbutton.addEventListener('click', this.play_stop.bind(this));
     const new_cut_button = document.querySelector('.add-cut');
     new_cut_button.addEventListener('click', this.new_cut.bind(this));
+    const delete_cut_button = document.querySelector('.delete-cut');
+    delete_cut_button.addEventListener('click', this.delete_cut.bind(this));
 
     //li-select
     this.ul.addEventListener('click', this.li_select.bind(this));
@@ -92,15 +95,20 @@ class Timeline {
   }
 
 
-  play_stop(e) {
+
+
+  async play_stop(e) {
     if(this.is_play === false) {
       this.is_play = true;
       e.target.innerHTML = '再生中…';
       e.target.setAttribute('title','ストップ');
+      Timer.start();
+
     }else {
       this.is_play = false;
       e.target.innerHTML = '再生';
       e.target.setAttribute('title','再生');
+      Timer.stop();
     }
   }
 
@@ -130,6 +138,21 @@ class Timeline {
     this.cut(1);
   }
 
+  delete_cut() {
+    console.log(this.ul.children.length)
+    if(this.ul.children.length > 2) {
+      const select = document.querySelector('.select');
+      let next_el = select.nextElementSibling;
+      if(next_el.matches('.dummy')) {
+        next_el = select.previousSibling;
+      }
+      next_el.click();
+
+      data.delete_cut(this.getlis_count(select));
+      select.remove();
+    }
+  }
+
 
   li_select(e) {
     if(e.target.matches('li:not(.dummy)')) {
@@ -141,7 +164,6 @@ class Timeline {
         }
         e.target.classList.add('select');
 
-        
         canvas.setimg(this.getlis_count(e.target));
       }
     }
@@ -152,8 +174,51 @@ class Timeline {
     return Array.prototype.indexOf.call(lis, el);
   }
 
+}
 
+class Timer {
+  
+  static sleep = msec => new Promise(resolve => setTimeout(resolve, msec));
+  flag = false;
 
+  static async start() {
+    this.flag = true;
+
+    let select = null;
+    let frame = null;
+
+    while(true) {
+      select = (select !== null) ? this.next(select) : document.querySelector('.select');
+      frame = data.getframe(timeline.getlis_count(select));
+
+      select.click();
+      
+      for(let i=0; i < frame; i++) {
+        await this.sleep(41);
+        if(this.flag === false) {break;}
+      }
+
+      if(this.flag === false) {break;}
+    }
+
+  }
+
+  static stop() {
+    this.flag = false;
+  }
+
+  static next(el) {
+    let next_el = el.nextElementSibling;
+    if(next_el.matches('.dummy')) {
+      next_el = next_el.parentNode.children[0];
+    }
+
+    return next_el;
+  }
+
+  // static sleep(msec){ 
+  //   new Promise(resolve => setTimeout(resolve, msec))
+  // }
 }
 
 
