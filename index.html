@@ -7,6 +7,7 @@
   <title>お絵かきアニメーション</title>
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="color.css">
 </head>
 <body>
   <screen>
@@ -30,8 +31,8 @@
       <div class="timeline-header">
         <div class="fps">24fps</div>
         <button class="play" title="再生">再生</button>
-        <button class="add-cut">新しいカット</button>
-        <button class="delete-cut">このカットを削除</button>
+        <button class="add-cut">新しい<br>カット</button>
+        <button class="delete-cut">このカットを<br>削除</button>
       </div>
     </div>
 
@@ -39,8 +40,10 @@
   </screen>
 
   <div class="files_dialog">
-    <button class="new-file">新規保存</button>
-    <button class="open-file">ファイルから読み込む</button>
+    <div>
+      <button class="new-file">新規保存</button>
+      <button class="open-file">ファイルから読み込む</button>
+    </div>
   </div>
 
   <data></data>

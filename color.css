@@ -1,0 +1,65 @@
+:root {
+  --item-concept-color:rgb(134, 243, 113);
+  --item-concept-color-hover:rgb(63, 240, 87);
+  --item-concept-color-active:rgb(60, 175, 76);
+  --item-concept-border-color: rgb(214, 233, 248);
+  --item-concept-border-color2: rgb(53, 64, 73);
+  --item-concept-border-color-active: rgb(32 145 22);
+  --item-concept-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  --item-concept-box-shadow-hover: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  --item-concept-box-shadow-active: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+body, screen, .files_dialog {
+  background-color: #eef7ed;
+}
+
+button {
+  background-color: var(--item-concept-color);
+  border: 0.13em solid var(--item-concept-border-color);
+  border-radius: 5px;
+  color: rgba(0,0,0,.72);
+  box-shadow: var(--item-concept-box-shadow);
+  transition: box-shadow ease 0.5s, background-color ease 0.5s;
+}
+button:hover {
+  background-color: var(--item-concept-color-hover);
+  box-shadow: var(--item-concept-box-shadow-hover);
+}
+button:active {
+  background-color: var(--item-concept-color-active);
+}
+
+/* header */
+
+
+/* canvas */
+canvas {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;;
+}
+
+/* timeline */
+li:not(.dummy) {
+  background-color: rgb(172, 253, 155);
+  box-shadow: var(--item-concept-box-shadow);
+  border:1px black solid;
+  transition: box-shadow ease 0.5s, border ease 0.2s;
+}
+li:not(.dummy):hover {
+  box-shadow: var(--item-concept-box-shadow-hover);
+}
+li:not(.dummy):active {
+  box-shadow: var(--item-concept-box-shadow-active);
+}
+.select {
+  border: 4px solid var(--item-concept-border-color-active) !important;
+  box-shadow: var(--item-concept-box-shadow-hover) !important;
+}
+.dragging {
+  box-shadow: var(--item-concept-box-shadow-active) !important;
+}
+
+/* files_dialog */
+.files_dialog button {
+  border-radius: 15px;
+}

@@ -7,6 +7,8 @@ body, screen {
 
   display: block;
   box-sizing: border-box;
+
+  font-size: 17px;
 }
 
 screen {
@@ -18,9 +20,12 @@ data {
   display: none;
 }
 
+/* header */
 .header > div {
   display: inline;
+  user-select: none;
 }
+
 
 /* canvas */
 .canvas-wrapper {
@@ -29,17 +34,19 @@ data {
   justify-content: center;
   width: 100%;
   height: 100%;
-  /* padding: 10px; */
 }
 
 canvas {
   width: 80%;
   aspect-ratio: 21/9;
   box-sizing: border-box;
-  border: 3px black solid;
+  border: 2px black solid;
 }
 
 
+
+
+/* timeline */
 ul {
   display: flex;
   list-style: none;
@@ -61,9 +68,7 @@ li:not(.dummy) {
   height: 50%;
   padding: 0;
   margin: 0;
-  background-color: whitesmoke;
   border-radius: 3px ;
-  border:1px black solid;
   /* resize: horizontal;
   overflow: auto; */
   text-align: center;
@@ -77,7 +82,7 @@ li:not(.dummy) {
 }
 
 .select {
-  border: 4px yellow double !important;
+  /* border-change */
 }
 
 li > div {
@@ -100,10 +105,6 @@ li span {
   text-align: center;
 }
 
-
-
-
-
 .dragging {
   opacity: 0.3;
 }
@@ -115,16 +116,10 @@ li span {
   content: '';
   display: block;
   background-color: red;
-  display: block;
   height: 90px;
   width: 2px;
   position: absolute;
 }
-
-
-
-
-
 
 .timeline {
   display: grid;
@@ -134,9 +129,23 @@ li span {
   user-select: none;
 }
 
+.timeline-header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.timeline-header >button {
+  width: 100%;
+  font-size: 1rem;
+}
+.fps {
+  text-align: center;
+}
 
 
 
+
+/* files-dialog */
 .files_dialog {
   z-index: 100;
   width: 100%;
@@ -147,5 +156,14 @@ li span {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: whitesmoke;
+}
+.files_dialog > div {
+  display: grid;
+  width: 80%;
+  height: 50%;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}
+.files_dialog button {
+  font-size: 30px;
 }
